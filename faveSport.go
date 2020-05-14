@@ -1,8 +1,10 @@
 package main
 
-/*func main() {
+import "fmt"
 
-}*/
+func main() {
+	fmt.Println("Aren't sports fun??")
+}
 
 //Rating for different sports
 func FavoriteSport(sport string) string {
