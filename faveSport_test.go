@@ -2,23 +2,33 @@ package main
 
 import "testing"
 
-func TestFavororiteSport(t *testing.T) {
+func TestSportRating(t *testing.T) {
 
-	//Testing for valid argument
-	fSport := FavoriteSport("Football")
+	//Testing for one argument
+	fSport := SportRating("Football")
 
 	if fSport != "Football: 100/10" {
 		t.Errorf("Failed: Expected %v, got %v", "Football: 100/10", fSport)
 	} else {
 		t.Logf("Success: Expected %v, got %v", "Football: 100/10", fSport)
 	}
+}
 
-	//Testing for invalid argument
-	fSportInvalid := FavoriteSport("Ew Sports")
+func TableDrivenTestSportsRating(t *testing.T) {
 
-	if fSportInvalid != "Invalid Sport or Argument" {
-		t.Errorf("Failed: Expected %v, got %v", "Invalid Sport or Argument", fSportInvalid)
-	} else {
-		t.Logf("Success: Expected %v, got %v", "Invalid Sport or Argument", fSportInvalid)
+	var tests = []struct {
+		input    string
+		expected string
+	}{
+		{"soccer", "Soccer: 9/10"},
+		{"pingpong", "Pingpong: 10/10"},
+		{"", "Invalid Sport or Argument"},
 	}
+
+	for _, test := range tests {
+		if output := SportRating(test.input); output != test.expected {
+			t.Errorf("Test Failed: %v inputted, %v expected, %v received", test.input, test.expected, output)
+		}
+	}
+
 }
